@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>تعلم الوضوء — تعلم الصلاة</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>🕌</span> تعلم الصلاة</a>
+    <ul class="nav-links">
+      <li><a href="wudu.html" class="active">خطوات الوضوء</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <span class="hero-icon">💧</span>
+  <h1>تعلّم الوضوء</h1>
+  <p>خطوات الوضوء الصحيح مع الصور والأذكار الصوتية — شرط أساسي للصلاة</p>
+</section>
+
+<div class="container">
+  <div class="section-title">
+    <h2>خطوات الوضوء التسع</h2>
+    <p>اضغط على السهم للانتقال — اضغط على الصورة لتكبيرها — استخدم مفاتيح الأسهم في لوحة المفاتيح</p>
+  </div>
+
+  <div class="step-navigator">
+    <div class="step-nav-header">
+      <h3 id="nav-label">الخطوة ١ من ٩</h3>
+      <div class="step-counter-chips" id="chips"></div>
+    </div>
+
+    <div class="step-body">
+      <div class="step-img-panel">
+        <img id="step-img" src="" alt="" onclick="openLightbox(this.src,this.alt)"/>
+      </div>
+      <div class="step-text-panel" id="step-text-panel"></div>
+    </div>
+
+    <div class="step-nav-footer">
+      <div class="step-progress-bar">
+        <div class="step-progress-fill" id="step-progress"></div>
+      </div>
+      <button class="learned-btn" id="learned-btn" onclick="toggleLearned()">☐ تعلمتها</button>
+      <div class="nav-arrows">
+        <button class="arrow-btn" id="prev-btn" onclick="goStep(-1)" title="السابق">→</button>
+        <button class="arrow-btn" id="next-btn" onclick="goStep(1)" title="التالي">←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO CARD -->
+  <div style="background:#fff;border-radius:18px;padding:26px;border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:20px;">
+    <h3 style="color:var(--primary-dark);font-size:1.15rem;margin-bottom:14px;">💡 معلومات مهمة عن الوضوء</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
+      <div style="background:var(--accent);border-radius:12px;padding:14px;">
+        <p style="font-weight:700;color:var(--primary);margin-bottom:4px;">🔄 عدد المرات</p>
+        <p style="font-size:.9rem;color:#444;">كل عضو يُغسل ثلاث مرات — ما عدا مسح الرأس والأذنين فمرة واحدة</p>
+      </div>
+      <div style="background:var(--accent);border-radius:12px;padding:14px;">
+        <p style="font-weight:700;color:var(--primary);margin-bottom:4px;">➡️ الترتيب واجب</p>
+        <p style="font-size:.9rem;color:#444;">يجب اتباع الترتيب المذكور في الآية الكريمة ولا يصح تغييره</p>
+      </div>
+      <div style="background:var(--accent);border-radius:12px;padding:14px;">
+        <p style="font-weight:700;color:var(--primary);margin-bottom:4px;">💧 الموالاة</p>
+        <p style="font-size:.9rem;color:#444;">يجب المتابعة بين الأعضاء دون توقف طويل حتى لا يجف العضو الأول</p>
+      </div>
+      <div style="background:var(--accent);border-radius:12px;padding:14px;">
+        <p style="font-weight:700;color:var(--primary);margin-bottom:4px;">📖 الدليل</p>
+        <p style="font-size:.9rem;color:#444;font-family:'Amiri',serif;font-size:1rem;">﴿يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ...﴾ المائدة:٦</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:50px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a href="steps.html" class="btn-primary" style="text-decoration:none;display:inline-flex;align-items:center;">← تعلم خطوات الصلاة</a>
+    <a href="quiz.html" class="btn-secondary">اختبر نفسك 🏆</a>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt=""/>
+</div>
+
+<footer class="footer">
+  <p>موقع <strong>تعلم الصلاة</strong> — دليل تعليمي للمبتدئين والأطفال</p>
+</footer>
+
+<script>
+var STEPS = [
+  {
+    num:'١', title:'النية',
+    img:'wudu-niyyah.png',
+    arabic:'نويتُ الوضوء لرفع الحدث وللصلاة لله تعالى',
+    transliteration:'Nawaytu al-wudu\' li raf\'i al-hadath wa lis-salati lillahi ta\'ala',
+    desc:'النية شرط في الوضوء. استحضر في قلبك أنك ستتوضأ لله لرفع الحدث والاستعداد للصلاة. محل النية القلب ولا يُشترط النطق بها.',
+    audio:null
+  },
+  {
+    num:'٢', title:'غسل الكفين',
+    img:'wudu-hands.png',
+    arabic:'بِسْمِ اللَّهِ',
+    transliteration:'Bismillah — ثم غسل الكفين ثلاث مرات',
+    desc:'ابدأ بقول "بسم الله" ثم اغسل كفيك ثلاث مرات. أمرّ كل يد على ظهر الأخرى وبين الأصابع. ابدأ باليد اليمنى.',
+    audio:'بسم الله'
+  },
+  {
+    num:'٣', title:'المضمضة',
+    img:'wudu-mouth.png',
+    arabic:'المضمضة — تحريك الماء في الفم ثلاث مرات',
+    transliteration:'Al-Madmadah — rinsing the mouth 3 times',
+    desc:'خذ الماء في فمك وحرّكه جيداً في جميع أرجاء الفم، ثم ابصقه. كرر ثلاث مرات. يُستحب الاستنشاق والمضمضة من غرفة واحدة.',
+    audio:'المضمضة ثلاث مرات'
+  },
+  {
+    num:'٤', title:'الاستنشاق والاستنثار',
+    img:'wudu-nose.png',
+    arabic:'الاستنشاق — شم الماء في الأنف والاستنثار',
+    transliteration:'Al-Istinshaq — inhaling water into nose, then blowing it out',
+    desc:'استنشق الماء في أنفك بالنَّفَس ثلاث مرات، ثم استنثره (انفخه خارجاً) باليد اليسرى. بالغ في الاستنشاق إلا إذا كنت صائماً.',
+    audio:null
+  },
+  {
+    num:'٥', title:'غسل الوجه',
+    img:'wudu-face.png',
+    arabic:'وَاغْسِلُوا وُجُوهَكُمْ',
+    transliteration:'Waghsilu wujuhakum — اغسلوا وجوهكم (المائدة:٦)',
+    desc:'اغسل وجهك ثلاث مرات من منابت شعر الرأس إلى الذقن طولاً، ومن الأذن إلى الأذن عرضاً. تأكد من وصول الماء للجميع.',
+    audio:'اغسلوا وجوهكم'
+  },
+  {
+    num:'٦', title:'غسل اليدين إلى المرفقين',
+    img:'wudu-arms.png',
+    arabic:'وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ',
+    transliteration:'Wa aydiyakum ila al-marafiq — (المائدة:٦)',
+    desc:'اغسل يدك اليمنى من أطراف الأصابع حتى المرفق ثلاث مرات، ثم اليسرى كذلك. لا تنسَ المرفق نفسه فهو داخل في الحدّ.',
+    audio:'اغسلوا أيديكم إلى المرافق'
+  },
+  {
+    num:'٧', title:'مسح الرأس',
+    img:'wudu-head.png',
+    arabic:'وَامْسَحُوا بِرُءُوسِكُمْ',
+    transliteration:'Wamsahu bi ru\'usikum — (المائدة:٦)',
+    desc:'بلّل يديك بالماء ثم امسح رأسك من الأمام إلى الخلف ثم ارجع من الخلف إلى الأمام — مرة واحدة. لا تُكرر مسح الرأس.',
+    audio:'امسحوا برؤوسكم'
+  },
+  {
+    num:'٨', title:'مسح الأذنين',
+    img:'wudu-ears.png',
+    arabic:'مسح الأذنين من الداخل والخارج',
+    transliteration:'Wiping inside and outside of ears with index finger and thumb',
+    desc:'ضع إصبعيك السبابتين داخل الأذنين وأبهاميك على ظاهرهما، وامسح الأذنين معاً مرة واحدة. هذا سنة مؤكدة.',
+    audio:null
+  },
+  {
+    num:'٩', title:'غسل القدمين',
+    img:'wudu-feet.png',
+    arabic:'وَأَرْجُلَكُمْ إِلَى الْكَعْبَيْنِ',
+    transliteration:'Wa arjulakum ila al-ka\'bayn — (المائدة:٦)',
+    desc:'اغسل قدمك اليمنى ثلاث مرات من أطراف الأصابع حتى الكعبين، مع تخليل الأصابع باليد. ثم القدم اليسرى كذلك. هذا آخر الوضوء.',
+    audio:'اغسلوا أرجلكم إلى الكعبين'
+  }
+];
+
+var TOTAL = STEPS.length;
+var current = 0;
+var learned = JSON.parse(localStorage.getItem('wudu_learned') || '[]');
+
+function buildChips() {
+  var c = document.getElementById('chips');
+  c.innerHTML = '';
+  STEPS.forEach(function(_, i) {
+    var btn = document.createElement('button');
+    btn.className = 'step-chip' + (learned.includes(i) ? ' done' : '') + (i===current ? ' active' : '');
+    btn.textContent = i+1;
+    btn.onclick = function(){ current=i; render(); };
+    c.appendChild(btn);
+  });
+}
+
+function render() {
+  var s = STEPS[current];
+  document.getElementById('nav-label').textContent = 'الخطوة ' + s.num + ' من ' + TOTAL;
+  document.getElementById('step-img').src = s.img;
+  document.getElementById('step-img').alt = s.title;
+  document.getElementById('step-progress').style.width = ((current+1)/TOTAL*100)+'%';
+  document.getElementById('prev-btn').disabled = current===0;
+  document.getElementById('next-btn').disabled = current===TOTAL-1;
+
+  var lb = document.getElementById('learned-btn');
+  lb.textContent = learned.includes(current) ? '✅ تعلمتها!' : '☐ تعلمتها';
+  lb.className = 'learned-btn' + (learned.includes(current) ? ' learned' : '');
+
+  var panel = document.getElementById('step-text-panel');
+  panel.classList.remove('fade-in');
+  void panel.offsetWidth;
+  panel.classList.add('fade-in');
+
+  panel.innerHTML =
+    '<div class="step-num-badge">💧 الخطوة ' + s.num + '</div>' +
+    '<div class="step-title">' + s.title + '</div>' +
+    '<div class="arabic-box">' + s.arabic + '</div>' +
+    '<p class="transliteration">' + s.transliteration + '</p>' +
+    (s.audio ? '<button class="audio-btn" id="audio-btn" onclick="speak()">🔊 استمع</button>' : '') +
+    '<p class="step-desc">' + s.desc + '</p>';
+
+  buildChips();
+}
+
+function goStep(dir) {
+  var next = current + dir;
+  if(next < 0 || next >= TOTAL) return;
+  current = next;
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleLearned() {
+  var idx = learned.indexOf(current);
+  if(idx === -1) learned.push(current);
+  else learned.splice(idx,1);
+  localStorage.setItem('wudu_learned', JSON.stringify(learned));
+  render();
+}
+
+function speak() {
+  var s = STEPS[current];
+  if(!s.audio) return;
+  if(window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    var btn = document.getElementById('audio-btn');
+    if(btn){ btn.textContent='🔊 استمع'; btn.classList.remove('playing'); }
+    return;
+  }
+  var utt = new SpeechSynthesisUtterance(s.audio);
+  utt.lang='ar-SA'; utt.rate=0.8;
+  var btn = document.getElementById('audio-btn');
+  if(btn){ btn.textContent='⏹ إيقاف'; btn.classList.add('playing'); }
+  utt.onend = function(){
+    var b = document.getElementById('audio-btn');
+    if(b){ b.textContent='🔊 استمع'; b.classList.remove('playing'); }
+  };
+  window.speechSynthesis.speak(utt);
+}
+
+function openLightbox(src,alt){
+  document.getElementById('lightbox-img').src=src;
+  document.getElementById('lightbox-img').alt=alt;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+document.addEventListener('keydown', function(e){
+  if(e.key==='ArrowLeft') goStep(1);
+  if(e.key==='ArrowRight') goStep(-1);
+  if(e.key==='Escape') closeLightbox();
+});
+
+render();
+</script>
+</body>
+</html>
