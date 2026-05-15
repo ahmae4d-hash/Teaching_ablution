@@ -4,6 +4,18 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>تعلم الوضوء — تعلم الصلاة</title>
+  <!-- ===== PWA ===== -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c8a94a">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/Teaching_ablution/sw.js');
+      });
+    }
+  </script>
+  <!-- ===== END PWA ===== -->
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
