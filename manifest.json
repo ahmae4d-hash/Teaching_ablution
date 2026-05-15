@@ -1,0 +1,27 @@
+{
+  "name": "تعليم الوضوء",
+  "short_name": "الوضوء",
+  "description": "تعلم الوضوء بشكل صحيح",
+  "start_url": "/Teaching_ablution/",
+  "scope": "/Teaching_ablution/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1117",
+  "theme_color": "#c8a94a",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
